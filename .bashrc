@@ -44,6 +44,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+#Github:
+
 #Aliases 
 
 alias grep='grep --color=auto'
@@ -51,4 +53,29 @@ alias c='clear'
 alias p='ps aux | grep'
 alias e='exit'
 alias nrc='nvim /home/gaia/.config/awesome/rc.lua'
+
+function mcd() {
+    mkdir -p "$@" && cd "$@" || return
+}
+
+function extract () {
+     if [ -f $1 ] ; then
+         case $1 in
+             *.tar.bz2)   tar xjf $1     ;;
+             *.tar.gz)    tar xzf $1     ;;
+             *.bz2)       bunzip2 $1     ;;
+             *.rar)       unrar e $1     ;;
+             *.gz)        gunzip $1      ;;
+             *.tar)       tar xf $1      ;;
+             *.tbz2)      tar xjf $1     ;;
+             *.tgz)       tar xzf $1     ;;
+             *.zip)       unzip $1       ;;
+             *.Z)         uncompress $1  ;;
+             *.7z)        7z x $1        ;;
+             *)           echo "Cannot extract '$1': unknown archive format" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
 
